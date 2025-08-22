@@ -1,0 +1,201 @@
+@import "tailwindcss";
+
+:root {
+  --background-light: #f0f2f5;
+  --foreground-light: #1c1e21;
+  --primary-light: #ff4081; /* Vivid Pink */
+  --secondary-light: #7c4dff; /* Deep Purple */
+  --accent-light: #00e5ff; /* Bright Cyan */
+  --surface-light: #ffffff;
+
+  --background-dark: #18191a;
+  --foreground-dark: #e4e6eb;
+  --primary-dark: #ff80ab; /* Lighter Pink */
+  --secondary-dark: #b39ddb; /* Lighter Purple */
+  --accent-dark: #84ffff; /* Lighter Cyan */
+  --surface-dark: #242526;
+
+  /* Assign default theme (light) */
+  --background: var(--background-light);
+  --foreground: var(--foreground-light);
+  --primary: var(--primary-light);
+  --secondary: var(--secondary-light);
+  --accent: var(--accent-light);
+  --surface: var(--surface-light);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: var(--background-dark);
+    --foreground: var(--foreground-dark);
+    --primary: var(--primary-dark);
+    --secondary: var(--secondary-dark);
+    --accent: var(--accent-dark);
+    --surface: var(--surface-dark);
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+.splash-active header,
+.splash-active footer {
+  display: none;
+}
+
+/* Liquid Glass Base Style */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.dark .glass-effect {
+  background: rgba(36, 37, 38, 0.2);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* Splash Screen */
+.splash-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  background-size: cover;
+  background-position: center;
+}
+
+.main-content {
+  position: relative;
+  z-index: 1;
+}
+
+
+/* Block Page */
+.block-page-container {
+  display: flex;
+  width: 100%;
+}
+
+.block-image-container {
+  position: relative;
+  width: 50%;
+  height: 100vh;
+}
+
+.block-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  aspect-ratio: 9 / 16;
+}
+
+.block-text-container {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    right: 2rem;
+    color: white;
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 1rem;
+    border-radius: 0.5rem;
+}
+
+
+/* Mobile */
+@media (max-width: 768px) {
+  .block-page-container {
+    flex-direction: column;
+  }
+
+  .block-image-container {
+    width: 100%;
+    height: 80vh;
+  }
+
+  .block-text-container {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    color: inherit;
+    background-color: transparent;
+    padding: 1rem;
+    border-radius: 0;
+    width: 100%;
+    order: 2; /* Default order for text */
+  }
+
+  .block-image-container {
+      order: 1; /* Default order for image */
+  }
+
+  .block-content-mobile-swap {
+      display: flex;
+      flex-direction: column;
+  }
+
+  .block-content-mobile-swap .image1 { order: 1; }
+  .block-content-mobile-swap .text1 { order: 2; }
+  .block-content-mobile-swap .image2 { order: 3; }
+  .block-content-mobile-swap .text2 { order: 4; }
+}
+
+html {
+  scroll-snap-type: y mandatory;
+}
+
+.scroll-snap-section {
+  scroll-snap-align: start;
+}
+
+html.scroll-snap-disabled {
+  scroll-snap-type: none;
+}
+
+/* Minimal Markdown body styles for chat rendering */
+.markdown-body {
+  color: inherit;
+}
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3 {
+  font-weight: 700;
+  line-height: 1.25;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+}
+.markdown-body p {
+  margin: 0.25rem 0 0.75rem;
+}
+.markdown-body ul {
+  list-style: disc;
+  padding-left: 1.25rem;
+  margin: 0.25rem 0 0.75rem;
+}
+.markdown-body ol {
+  list-style: decimal;
+  padding-left: 1.25rem;
+  margin: 0.25rem 0 0.75rem;
+}
+.markdown-body code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  background: rgba(0,0,0,0.06);
+  border-radius: 6px;
+  padding: 0.125rem 0.375rem;
+}
+.markdown-body pre {
+  background: rgba(0,0,0,0.06);
+  border-radius: 10px;
+  padding: 0.75rem;
+  overflow-x: auto;
+  margin: 0.5rem 0 1rem;
+}
